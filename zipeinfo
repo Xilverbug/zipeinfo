@@ -24,6 +24,10 @@ for zipfile in args:
 	iszip=0
 	while 1:
 		head=f.read(4)
+		if head == b"PK\x07\x08" : 
+			pos+=16
+			f.seek(pos)
+			continue
 		if head != b"PK\x03\x04": break
 		iszip=1
 		version=struct.unpack("H", f.read(2))[0]
